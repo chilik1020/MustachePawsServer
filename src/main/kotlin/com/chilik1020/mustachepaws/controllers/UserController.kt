@@ -8,10 +8,11 @@ import com.chilik1020.mustachepaws.services.UserServiceImpl
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
+import javax.servlet.http.HttpServletRequest
 
 @RestController
 @RequestMapping("/users")
-class UserController (val userService: UserServiceImpl, val userAssembler: UserAssembler, val userRepository: UserRepository) {
+class UserController(val userService: UserServiceImpl, val userAssembler: UserAssembler, val userRepository: UserRepository) {
 
     @PostMapping
     @RequestMapping("/registration")
@@ -22,9 +23,15 @@ class UserController (val userService: UserServiceImpl, val userAssembler: UserA
 
     @GetMapping
     @RequestMapping("/{user_id}")
-    fun show(@PathVariable("user_id") userId: Long) : ResponseEntity<UserVO> {
+    fun show(@PathVariable("user_id") userId: Long): ResponseEntity<UserVO> {
         val user = userService.retrieveUserData(userId)
         return ResponseEntity.ok(userAssembler.toUserVO(user))
     }
 
+    @GetMapping
+    @RequestMapping("/details")
+    fun echoDetails(request: HttpServletRequest): ResponseEntity<UserVO>{
+        val user = userRepository.findByUsername(request.userPrincipal.name) as User
+        return ResponseEntity.ok(userAssembler.toUserVO(user))
+    }
 }

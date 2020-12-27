@@ -3,8 +3,11 @@ package com.chilik1020.mustachepaws.config
 import com.chilik1020.mustachepaws.filters.JWTAuthenticationFilter
 import com.chilik1020.mustachepaws.filters.JWTLoginFilter
 import com.chilik1020.mustachepaws.services.AppUserDetailsService
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
+import org.springframework.security.authentication.AuthenticationManager
+import org.springframework.security.config.BeanIds
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -36,5 +39,10 @@ class WebSecurityConfig (val userDetailsService : AppUserDetailsService) : WebSe
     override fun configure(auth: AuthenticationManagerBuilder) {
         auth.userDetailsService<UserDetailsService>(userDetailsService)
                 .passwordEncoder(BCryptPasswordEncoder())
+    }
+
+    @Bean(name = [BeanIds.AUTHENTICATION_MANAGER])
+    override fun authenticationManagerBean(): AuthenticationManager {
+        return super.authenticationManagerBean()
     }
 }

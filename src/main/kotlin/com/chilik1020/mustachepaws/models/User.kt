@@ -10,7 +10,7 @@ import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size
 
 @Entity
-@Table(name = "user", schema = "public")
+@Table(name = "users", schema = "public")
 @EntityListeners(UserListener::class)
 class User(
         @Id
@@ -44,6 +44,6 @@ class User(
         @Column(name = "created_at")
         var createdAt: Date = Date.from(Instant.now())
 ) {
-        @OneToMany(mappedBy = "creator", targetEntity = Post::class)
-        private var createdPosts: Collection<Post>? = null
+    @OneToMany(mappedBy = "creator", targetEntity = Post::class)
+    private var createdPosts: Collection<Post>? = null
 }
