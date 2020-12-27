@@ -1,13 +1,9 @@
 package com.chilik1020.mustachepaws.controllers
 
 import com.chilik1020.mustachepaws.components.PostAssembler
-import com.chilik1020.mustachepaws.helpers.objects.PostListVO
 import com.chilik1020.mustachepaws.helpers.objects.PostVO
-import com.chilik1020.mustachepaws.helpers.objects.UserVO
-import com.chilik1020.mustachepaws.models.Post
 import com.chilik1020.mustachepaws.models.PostRequestObject
 import com.chilik1020.mustachepaws.services.PostServiceImpl
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
@@ -18,9 +14,9 @@ import javax.servlet.http.HttpServletRequest
 class PostController(val postService: PostServiceImpl, val postAssembler: PostAssembler) {
 
     @GetMapping("/all")
-    fun getPosts(request: HttpServletRequest): ResponseEntity<PostListVO> {
-        val posts = postService.getAll()
-        return ResponseEntity.ok(postAssembler.toPostListVO(posts))
+    fun getPosts(request: HttpServletRequest): ResponseEntity<List<PostVO>> {
+        val posts = postService.getAll().map { postAssembler.toPostVO(it) }
+        return ResponseEntity.ok(posts)
     }
 
     @GetMapping
@@ -40,7 +36,7 @@ class PostController(val postService: PostServiceImpl, val postAssembler: PostAs
     fun create(@RequestParam closed: Boolean,
                @RequestParam description: String,
                @RequestParam creatorUsername: String,
-               @RequestParam("image") image: MultipartFile) : ResponseEntity<PostVO> {
+               @RequestParam("image") image: MultipartFile): ResponseEntity<PostVO> {
         println(closed)
         println(description)
         println(creatorUsername)
