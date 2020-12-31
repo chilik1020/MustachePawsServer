@@ -4,9 +4,14 @@ import com.chilik1020.mustachepaws.components.PostAssembler
 import com.chilik1020.mustachepaws.helpers.objects.PostVO
 import com.chilik1020.mustachepaws.models.PostRequestObject
 import com.chilik1020.mustachepaws.services.PostServiceImpl
+import org.apache.commons.io.IOUtils
+import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
+import java.io.FileInputStream
 import javax.servlet.http.HttpServletRequest
 
 @RestController
@@ -53,5 +58,18 @@ class PostController(val postService: PostServiceImpl, val postAssembler: PostAs
     @DeleteMapping("/delete/{id}")
     fun deleteById(@PathVariable("id") id: Long) {
         postService.delete(id)
+    }
+
+
+    @GetMapping
+    @RequestMapping("/image/{fileName}")
+    fun getImageByUrl(@PathVariable("fileName") fileName: String): ResponseEntity<ByteArray> {
+        println(fileName)
+        val inStream = FileInputStream("/home/chilik1020/uploads/$fileName")
+        val media = IOUtils.toByteArray(inStream)
+        val headers = HttpHeaders().apply {
+            contentType = MediaType.IMAGE_JPEG
+        }
+        return ResponseEntity(media, headers, HttpStatus.OK)
     }
 }
