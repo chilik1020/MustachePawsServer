@@ -10,8 +10,8 @@ import org.springframework.web.multipart.MultipartFile
 interface PostService {
 
     fun getAll(): MutableList<PostNew>
-
-    fun getOne(id: Long): Post
+    fun getOne(id: Long): PostNew
+    fun getByCreator(id: Long): List<PostNew>
 
     fun save(postRO: PostRequestObject): Post
     fun saveNP(postRO: PostNewRequestObject): PostNew

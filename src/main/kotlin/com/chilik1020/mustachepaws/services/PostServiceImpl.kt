@@ -24,8 +24,13 @@ class PostServiceImpl(
         return postNewRepository.findAll()
     }
 
-    override fun getOne(id: Long): Post {
-        return postRepository.getOne(id)
+    override fun getOne(id: Long): PostNew {
+        return postNewRepository.getOne(id)
+    }
+
+    override fun getByCreator(id: Long): List<PostNew> {
+        val user = userRepository.getOne(id)
+        return postNewRepository.findByCreator(user)
     }
 
     override fun save(postRO: PostRequestObject): Post {
@@ -69,6 +74,6 @@ class PostServiceImpl(
     }
 
     override fun delete(id: Long) {
-        postRepository.deleteById(id)
+        postNewRepository.deleteById(id)
     }
 }
