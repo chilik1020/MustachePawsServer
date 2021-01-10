@@ -1,7 +1,5 @@
 package com.chilik1020.mustachepaws.helpers.objects
 
-import com.chilik1020.mustachepaws.models.AnimalType
-import com.chilik1020.mustachepaws.models.AssistanceType
 import com.chilik1020.mustachepaws.models.PostLocation
 
 data class UserVO(
@@ -11,6 +9,7 @@ data class UserVO(
         val lastname: String,
         val email: String,
         val phoneNumber: String,
+        val profileImage: String?,
         val createdAt: String
 )
 
@@ -28,8 +27,8 @@ data class PostNewVO(
         val closed: Boolean,
         val description: String,
         val imageLink: String,
-        val assistType: AssistanceType,
-        val animalType: AnimalType,
+        val assistType: String,
+        val animalType: String,
         val location: PostLocation,
         val creatorUsername: String,
         val createdAt: Long

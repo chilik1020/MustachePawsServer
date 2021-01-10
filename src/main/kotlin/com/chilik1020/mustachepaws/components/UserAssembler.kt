@@ -14,6 +14,7 @@ class UserAssembler {
                 user.lastname,
                 user.email,
                 user.phonenumber,
+                user.profileImage,
                 user.createdAt.toString())
     }
 

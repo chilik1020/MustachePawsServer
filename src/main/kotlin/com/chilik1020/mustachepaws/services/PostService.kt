@@ -4,7 +4,6 @@ import com.chilik1020.mustachepaws.models.Post
 import com.chilik1020.mustachepaws.models.PostNew
 import com.chilik1020.mustachepaws.models.PostNewRequestObject
 import com.chilik1020.mustachepaws.models.PostRequestObject
-import org.springframework.web.multipart.MultipartFile
 
 
 interface PostService {
@@ -16,7 +15,7 @@ interface PostService {
     fun save(postRO: PostRequestObject): Post
     fun saveNP(postRO: PostNewRequestObject): PostNew
 
-    fun saveUploadedImage(file: MultipartFile): String?
+    // fun saveUploadedImage(file: MultipartFile): String?
 
     fun delete(id: Long)
 }

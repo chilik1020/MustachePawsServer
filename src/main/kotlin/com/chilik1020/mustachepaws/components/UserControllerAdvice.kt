@@ -11,25 +11,25 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 class UserControllerAdvice {
 
     @ExceptionHandler(UsernameUnavailableException::class)
-    fun usernameUnavailable(usernameUnavailableException: UsernameUnavailableException) : ResponseEntity<ErrorResponse> {
+    fun usernameUnavailable(usernameUnavailableException: UsernameUnavailableException): ResponseEntity<ErrorResponse> {
         val res = ErrorResponse(ResponseConstants.USERNAME_UNAVAILABLE.value, usernameUnavailableException.message)
         return ResponseEntity.unprocessableEntity().body(res)
     }
 
     @ExceptionHandler(EmailUnavailableException::class)
-    fun emailUnavailable(emailUnavailableException: EmailUnavailableException) : ResponseEntity<ErrorResponse> {
+    fun emailUnavailable(emailUnavailableException: EmailUnavailableException): ResponseEntity<ErrorResponse> {
         val res = ErrorResponse(ResponseConstants.EMAIL_UNAVAILABLE.value, emailUnavailableException.message)
         return ResponseEntity.unprocessableEntity().body(res)
     }
 
     @ExceptionHandler(PhoneNumberUnavailableException::class)
-    fun emailUnavailable(phoneNumberUnavailableException: PhoneNumberUnavailableException) : ResponseEntity<ErrorResponse> {
+    fun phoneNumberUnavailable(phoneNumberUnavailableException: PhoneNumberUnavailableException): ResponseEntity<ErrorResponse> {
         val res = ErrorResponse(ResponseConstants.PHONENUMBER_UNAVAILABLE.value, phoneNumberUnavailableException.message)
         return ResponseEntity.unprocessableEntity().body(res)
     }
 
     @ExceptionHandler(InvalidUserIdException::class)
-    fun invalidUserId(invalidUserIdException: InvalidUserIdException) : ResponseEntity<ErrorResponse> {
+    fun invalidUserId(invalidUserIdException: InvalidUserIdException): ResponseEntity<ErrorResponse> {
         val res = ErrorResponse(ResponseConstants.INVALID_USER_ID.value, invalidUserIdException.message)
         return ResponseEntity.badRequest().body(res)
     }

@@ -33,6 +33,9 @@ class User(
         @Column(unique = true)
         var phonenumber: String = "",
 
+        @Column(name = "profile_image")
+        var profileImage: String = "",
+
         @Size(min = 60, max = 60)
         var password: String = "",
 

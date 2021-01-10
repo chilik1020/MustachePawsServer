@@ -49,23 +49,23 @@ class PostController(val postService: PostServiceImpl, val postAssembler: PostAs
         postService.delete(id)
     }
 
-    @GetMapping
-    @RequestMapping("/image/{fileName}")
-    fun getImageByUrl(@PathVariable("fileName") fileName: String): ResponseEntity<ByteArray> {
-        println(fileName)
-        val inStream = FileInputStream("/home/chilik1020/uploads/$fileName")
-        val media = IOUtils.toByteArray(inStream)
-        val headers = HttpHeaders().apply {
-            contentType = MediaType.IMAGE_JPEG
-        }
-        return ResponseEntity(media, headers, HttpStatus.OK)
-    }
+//    @GetMapping
+//    @RequestMapping("/image/{fileName}")
+//    fun getImageByUrl(@PathVariable("fileName") fileName: String): ResponseEntity<ByteArray> {
+//        println(fileName)
+//        val inStream = FileInputStream("/home/chilik1020/uploads/$fileName")
+//        val media = IOUtils.toByteArray(inStream)
+//        val headers = HttpHeaders().apply {
+//            contentType = MediaType.IMAGE_JPEG
+//        }
+//        return ResponseEntity(media, headers, HttpStatus.OK)
+//    }
 
-    @PostMapping("/uploadImage")
-    fun uploadImage(
-            @RequestParam("image") image: MultipartFile
-    ) {
-        val imagePath = postService.saveUploadedImage(image)
-        println(imagePath)
-    }
+//    @PostMapping("/uploadImage")
+//    fun uploadImage(
+//            @RequestParam("image") image: MultipartFile
+//    ) {
+//        val imagePath = postService.saveUploadedImage(image)
+//        println(imagePath)
+//    }
 }

@@ -6,7 +6,7 @@ import com.chilik1020.mustachepaws.repositories.UserRepository
 import org.springframework.stereotype.Service
 
 @Service
-class UserServiceImpl (val repository: UserRepository): UserService {
+class UserServiceImpl(val repository: UserRepository) : UserService {
 
     @Throws(UsernameUnavailableException::class, EmailUnavailableException::class, PhoneNumberUnavailableException::class)
     override fun attemptRegistration(userDetails: User): User {
@@ -19,16 +19,19 @@ class UserServiceImpl (val repository: UserRepository): UserService {
         if (phoneNumberExists(userDetails.phonenumber))
             throw PhoneNumberUnavailableException("Phone number ${userDetails.phonenumber} is already exists.")
 
-            val user = User()
-            user.username = userDetails.username
-            user.password = userDetails.password
-            user.firstname = userDetails.firstname
-            user.lastname = userDetails.lastname
-            user.email = userDetails.email
-            user.phonenumber = userDetails.phonenumber
-            repository.save(user)
-            obscurePassword(user)
-            return user
+        val user = User().apply {
+            username = userDetails.username
+            password = userDetails.password
+            firstname = userDetails.firstname
+            lastname = userDetails.lastname
+            email = userDetails.email
+            phonenumber = userDetails.phonenumber
+            profileImage = userDetails.profileImage
+        }
+
+        repository.save(user)
+        obscurePassword(user)
+        return user
     }
 
     @Throws(UserStatusEmptyException::class)

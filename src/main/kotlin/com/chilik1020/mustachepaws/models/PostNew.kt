@@ -21,13 +21,11 @@ class PostNew(
         @Column(name = "image_link")
         var imageLink: String = "",
 
-        @Enumerated(EnumType.STRING)
         @Column(name = "assist_type")
-        var assistanceType: AssistanceType,
+        var assistanceType: String,
 
-        @Enumerated(EnumType.STRING)
         @Column(name = "animal_type")
-        var animalType: AnimalType,
+        var animalType: String,
 
         @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "location_id", referencedColumnName = "id")

@@ -1,11 +1,8 @@
 package com.chilik1020.mustachepaws.config
 
 import com.chilik1020.mustachepaws.components.AccountValidityInterceptor
-import com.chilik1020.mustachepaws.models.StringToAnimalTypeConverter
-import com.chilik1020.mustachepaws.models.StringToAssistTypeConverter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
-import org.springframework.format.FormatterRegistry
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
@@ -20,8 +17,8 @@ class AppConfig : WebMvcConfigurer {
         super.addInterceptors(registry)
     }
 
-    override fun addFormatters(registry: FormatterRegistry) {
-        registry.addConverter(StringToAnimalTypeConverter())
-        registry.addConverter(StringToAssistTypeConverter())
-    }
+//    override fun addFormatters(registry: FormatterRegistry) {
+//        registry.addConverter(StringToAnimalTypeConverter())
+//        registry.addConverter(StringToAssistTypeConverter())
+//    }
 }
