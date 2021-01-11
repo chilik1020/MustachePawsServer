@@ -2,9 +2,7 @@ package com.chilik1020.mustachepaws.models
 
 import com.chilik1020.mustachepaws.listeners.UserListener
 import org.springframework.format.annotation.DateTimeFormat
-
 import java.time.Instant
-import java.util.*
 import javax.persistence.*
 import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size
@@ -45,7 +43,7 @@ class User(
 
         @DateTimeFormat
         @Column(name = "created_at")
-        var createdAt: Date = Date.from(Instant.now())
+        var createdAt: Long = Instant.now().epochSecond
 ) {
     @OneToMany(mappedBy = "creator", targetEntity = Post::class)
     private var createdPosts: Collection<Post>? = null

@@ -15,7 +15,7 @@ class UserAssembler {
                 user.email,
                 user.phonenumber,
                 user.profileImage,
-                user.createdAt.toString())
+                user.createdAt)
     }
 
     fun toUserListVO(users: List<User>): List<UserVO> {

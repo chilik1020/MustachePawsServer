@@ -10,7 +10,7 @@ data class UserVO(
         val email: String,
         val phoneNumber: String,
         val profileImage: String?,
-        val createdAt: String
+        val createdAt: Long
 )
 
 data class PostVO(
